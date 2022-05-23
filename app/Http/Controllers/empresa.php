@@ -14,24 +14,35 @@ class empresa extends Controller
         if (!auth()->user()->email_verified) {
             return redirect()->route("dataRegister")->with("info", "Debes de completar el registro");
         }
-        $id=Auth::id();
+        $id = Auth::id();
         $empresa = DB::table('empresas')->where('idUser', $id)->get();
-        return view("empresa.main", compact("id","empresa"));
+        return view("empresa.main", compact("id", "empresa"));
     }
 
-    public function verEmpresa($id)
+    public function verEmpresaAdmin($idEmpresa)
     {
-        $empresa = DB::table('empresas')->where('idUser', $id)->get();
-        return view('empresa.verEmpresa', compact('empresa'));
+        $id = Auth::id();
+        $empresa = DB::table('empresas')->where('idEmpresa', "=", $idEmpresa)->get();
+        return view('empresa.verEmpresa', compact('empresa', 'id'));
     }
-    public function editarEmpresa($id)
+
+    public function verEmpresa($idUser)
     {
-        $empresa = DB::table('empresas')->where('idUser', $id)->get();
-        return view('empresa.editarEmpresa', compact('empresa'));
+        $id = Auth::id();
+        $empresa = DB::table('empresas')->where('idUser', "=", $idUser)->get();
+        return view('empresa.verEmpresa', compact('empresa', 'id'));
     }
-    public function editarEmpresaPost(updateEmpresaRequest $request){
-        $idUser = Auth::id();
-        DB::table("empresas")->where("idUser", "=", $idUser)->update([
+    public function editarEmpresa($idEmpresa)
+    {
+        $id = Auth::id();
+        $empresa = DB::table('empresas')->where('idEmpresa', "=", $idEmpresa)->get();
+
+        return view('empresa.editarEmpresa', compact('empresa', 'id'));
+    }
+    public function editarEmpresaPost(updateEmpresaRequest $request)
+    {
+        $id = Auth::id();
+        DB::table("empresas")->where("idUser", "=", $id)->update([
             "tipo" => $request->tipo,
             "web" => $request->web,
             "telefono" => $request->telefono,
@@ -40,7 +51,7 @@ class empresa extends Controller
             "observaciones" => $request->observaciones,
             "nombreComercial" => $request->nombre
         ]);
-        $empresa = DB::table('empresas')->where('idUser', $idUser)->get();
-        return view("empresa.verEmpresa", compact("empresa"));
+        $empresa = DB::table('empresas')->where('idUser', $id)->get();
+        return view("empresa.verEmpresa", compact("empresa", 'id'));
     }
 }

@@ -57,8 +57,8 @@
                                 no
                             @endif
                         </td>
-                        <td><a href="{{ route('verEmpresa', $empresa->idEmpresa) }}">Ver</a></td>
-                        <td><a href="{{ route('editarEmpresa', $empresa->idEmpresa) }}">Editar</a></td>
+                        <td><a href="{{ route('verEmpresaAdmin', $empresa->idEmpresa) }}">Ver</a></td>
+                        <td><a href="{{ route('editarEmpresaEmpresa', $empresa->idEmpresa) }}">Editar</a></td>
                         <td><input type="checkbox" class="marcado" value="{{ $empresa->idEmpresa }}"></td>
                 @endforeach
                 </tr>

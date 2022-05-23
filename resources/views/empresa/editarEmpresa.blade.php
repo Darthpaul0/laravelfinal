@@ -9,12 +9,12 @@ datos de la empresa
         @error('cif')
         <p>{{$message}}</p>
         @enderror
-        
+
         <input type="text" placeholder="Nombre" name="nombre" value="{{$empresa[0]->nombreComercial}}">
         @error('nombre')
         <p>{{$message}}</p>
         @enderror
-        
+
         <select placeholder="Tipo de empresa" name="tipo">
             <option value="{{$empresa[0]->tipo}}">{{$empresa[0]->tipo}}</option>
             @if($empresa[0]->tipo==="publico")
@@ -68,7 +68,6 @@ datos de la empresa
                         <td>Cargo</td>
                     </tr>
 
-                    {{-- Esto hay que generarlo dinámicamente --}}
                     @foreach ($tutores as $tutor)
                         <tr>
                             <td>{{ $tutor->nombre}}</td>
@@ -97,7 +96,6 @@ datos de la empresa
                         <td>Cargo</td>
                     </tr>
 
-                    {{-- Esto hay que generarlo dinámicamente --}}
                     @foreach ($representantes as $representante)
                         <tr>
                             <td>{{ $representante->nombre}}</td>
@@ -113,7 +111,7 @@ datos de la empresa
                 </tbody>
             </table>
         @endif
-        
+
         <a href="{{route("crearSede")}}">Añadir sede</a>
         @if(count($sedes)>0)
             <table>
@@ -126,10 +124,9 @@ datos de la empresa
                         <td>Provincia</td>
                         <td>Telefono</td>
                         <td>EMail</td>
-                        
+
                     </tr>
 
-                    {{-- Esto hay que generarlo dinámicamente --}}
                     @foreach ($sedes as $sede)
                         <tr>
                             <td>{{ $sede->nombreSede}}</td>

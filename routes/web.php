@@ -38,13 +38,14 @@ Route::get('correoEmpresa/{ids}', [admin::class, "correoEmpresa"])->name("correo
 Route::get('eliminarEmpresa/{ids}', [admin::class, "eliminarEmpresa"])->name("eliminarEmpresa")->middleware("auth");
 Route::get('mainEmpresa', [empresa::class, "mainEmpresa"])->name("mainEmpresa")->middleware("auth");
 Route::get('verEmpresa/{ids}', [empresa::class, "verEmpresa"])->name("verEmpresa")->middleware("auth");
-Route::get('editarEmpresa/{ids}', [empresa::class, "editarEmpresa"])->name("editarEmpresa")->middleware("auth");
+Route::get('verEmpresaAdmin/{ids}', [empresa::class, "verEmpresaAdmin"])->name("verEmpresaAdmin")->middleware("auth");
 Route::post('filtrar', [admin::class, "filtrar"])->name("filtrar")->middleware("auth");
 Route::get('cerrar', [login::class, "cerrar"])->name("cerrar")->middleware("auth");
 Route::post('UpdateDatosRegistro', [empresaControler::class, "UpdateDatosRegistro"])->name("UpdateDatosRegistro")->middleware("auth");
 Route::post('editarEmpresaPost', [empresa::class, "editarEmpresaPost"])->name("editarEmpresaPost")->middleware("auth");
 Route::post('enviarEmail', [admin::class, "enviarEmail"])->name("enviarEmail")->middleware("auth");
 Route::get('editarEmpresaEmpresa/{ids}', [empresaControler::class, "editarEmpresaEmpresa"])->name("editarEmpresaEmpresa")->middleware("auth");
+Route::get('editarEmpresa/{ids}', [empresaControler::class, "editarEmpresa"])->name("editarEmpresa")->middleware("auth");
 Route::get('crearTutor', [empresaControler::class, "crearTutor"])->name("crearTutor")->middleware("auth");
 Route::post('crearTutor', [empresaControler::class, "crearTutorPost"])->name("crearTutorPost")->middleware("auth");
 Route::get('eliminarTutor/{ids}', [empresaControler::class, "eliminarTutor"])->name("eliminarTutor")->middleware("auth");

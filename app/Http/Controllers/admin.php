@@ -60,9 +60,12 @@ class admin extends Controller
     // filtro para poder entrar + index
     public function mainAdmin()
     {
-        if (Auth::id() != 1) {
+        if (Auth::id() !== 1) {
             return redirect()->route("mainEmpresa");
+            //echo "Funciona";
+            //return dump(Auth::id());
         }
+        //return dump(Auth::id());
         $empresas = DB::table('empresas')->simplePaginate(env("PAGES_PAGINATION"));
 
         return view('admin.main', compact('empresas'));
@@ -97,7 +100,10 @@ class admin extends Controller
     {
         $arrayIds = explode(",", $ids);
         foreach ($arrayIds as $id) {
+            $empresas = DB::table('empresas')->where('idEmpresa', $id)->get();
             DB::table('empresas')->where('idEmpresa', $id)->update(array('autorizado' => 1));
+            DB::table('users')->where('id', $empresas[0]->idUser)->update(array('email_verified' => 1));
+            //dump($idUser, $id);
         }
         return redirect()->route('mainAdmin')->with('info', 'autorizada correctamente');
     }
