@@ -11,8 +11,8 @@ class solicitudPracticasControler extends Controller
 {
     public function peticionPracticas($ciclo, $idEmpresa){
         $id = Auth::id();
-        $tutores=DB::table('tutoresLaborales')->where("idEmpresa","=",$id)->get();
-        $sedes=DB::table('sedes')->where("idEmpresa","=",$id)->get();
+        $tutores=DB::table('tutoresLaborales')->where("idEmpresa","=",$idEmpresa)->get();
+        $sedes=DB::table('sedes')->where("idEmpresa","=",$idEmpresa)->get();
         $dataCiclo=DB::table('ciclocursos')->where("nombre","=",$ciclo)->get();
         return view("solicitudes.solicitud", compact("dataCiclo","id","tutores","sedes","idEmpresa"));
     }
@@ -29,22 +29,22 @@ class solicitudPracticasControler extends Controller
         $ciclo=DB::table('ciclocursos')->where("idCicloCurso","=",$request->idCiclo)->get();
         $horario="";
         if($request->mañana){
-            $horario.=" mañana ";
+            $horario.=",mañana,";
         }
         if($request->tarde){
-            $horario.=" tarde ";
+            $horario.=",tarde,";
         }
         $periodo="";
         if($request->marzo){
-            $periodo.=" marzo ";
+            $periodo.=",marzo,";
         }
         if($request->septiembre){
-            $periodo.=" septiembre ";
+            $periodo.=",septiembre,";
         }
         if($request->otros){
-            $periodo.=" otros ";
+            $periodo.=",otros,";
         }
-        //dump($request);
+        //dump($periodo);
         DB::table("solicitudes")->insert([
             "idEmpresa" => $request->idEmpresa,
             "idTutorLaboral" => $request->tutor,
@@ -64,15 +64,13 @@ class solicitudPracticasControler extends Controller
             "idCicloCurso"=> $request->idCiclo,
             "ciclo"=> $ciclo[0]->ciclo,
             "curso"=> $ciclo[0]->curso,
-            "modalidad"=>"null",
-            "fecha"=>date("j, n, Y"),
             "nombreCiclo"=> $ciclo[0]->nombre,
             "numAlumnos"=> $request->alumnos,
-            "horario"=> $horario, 
+            "horario"=> $horario,
             "periodo"=> $periodo,
             "observaciones"=> $request-> observaciones,
         ]);
-        
+
         return redirect()->route("mainEmpresa", $id)->with("info", "Solicitud de practicas enviada");
     }
 }

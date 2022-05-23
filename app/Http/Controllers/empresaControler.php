@@ -123,14 +123,14 @@ class empresaControler extends Controller
             "correo" => $request->correo,
             "cargo" => $request->cargo,
         ]);
-        return redirect()->route("mainEmpresa", $id)->with("info", "Datos guardados");
+        return redirect()->route("editarEmpresaEmpresa", $id)->with("info", "Datos guardados");
     }
 
     public function eliminarTutor($ids)
     {
         $id = Auth::id();
         DB::table("tutoreslaborales")->where("idTutorLaboral", "=", $ids)->delete();
-        return redirect()->route("editarEmpresaEmpresa", $id)->with("info", "Tutor eliminado");
+        return redirect()->route("mainEmpresa", $id)->with("info", "Tutor eliminado");
     }
 
     public function editarTutor($ids)
@@ -149,7 +149,7 @@ class empresaControler extends Controller
             "correo" => $request->correo,
             "cargo" => $request->cargo,
         ]);
-        return redirect()->route("editarEmpresaEmpresa", $id)->with("info", "Tutor editado");
+        return redirect()->route("mainEmpresa", $id)->with("info", "Tutor editado");
     }
 
     public function crearRepresentante()
@@ -172,7 +172,7 @@ class empresaControler extends Controller
             "cargo" => $request->cargo,
             "activo" => 1,
         ]);
-        return redirect()->route("editarEmpresaEmpresa", $id)->with("info", "Datos guardados");
+        return redirect()->route("mainEmpresa", $id)->with("info", "Datos guardados");
     }
 
     public function eliminarRepresentante($ids)
@@ -181,7 +181,7 @@ class empresaControler extends Controller
         DB::table("representantes")->where("idRepresentante", "=", $ids)->update([
             "activo" => 0,
         ]);
-        return redirect()->route("editarEmpresaEmpresa", $id)->with("info", "Representante eliminado");
+        return redirect()->route("mainEmpresa", $id)->with("info", "Representante eliminado");
     }
 
     public function editarRepresentante($ids)
@@ -224,16 +224,14 @@ class empresaControler extends Controller
             "telefono" => $request->telefono,
             "correo" => $request->correo,
         ]);
-        return redirect()->route("editarEmpresaEmpresa", $id)->with("info", "Datos guardados");
+        return redirect()->route("mainEmpresa", $id)->with("info", "Datos guardados");
     }
 
     public function eliminarSede($ids)
     {
         $id = Auth::id();
-        DB::table("sedes")->where("idSede", "=", $ids)->update([
-            "activo" => 0,
-        ]);
-        return redirect()->route("editarEmpresaEmpresa", $id)->with("info", "Sede eliminada");
+        DB::table("sedes")->where("idSede", "=", $ids)->delete();
+        return redirect()->route("mainEmpresa", $id)->with("info", "Sede eliminada");
     }
 
     public function editarSede($ids)
@@ -255,6 +253,6 @@ class empresaControler extends Controller
             "telefono" => $request->telefono,
             "correo" => $request->correo,
         ]);
-        return redirect()->route("editarEmpresaEmpresa", $id)->with("info", "Sede editada");
+        return redirect()->route("mainEmpresa", $id)->with("info", "Sede editada");
     }
 }

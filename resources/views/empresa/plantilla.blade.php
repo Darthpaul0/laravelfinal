@@ -20,9 +20,10 @@
         <div class="nav-wrapper">
             <a href="#" class="brand-logo">Portal de Practicas del IES Zaidín Vergeles</a>
             <ul id="nav-mobile" class="right hide-on-med-and-down">
+                <li><a href="{{route("mainEmpresa",$id)}}">Inicio</a></li>
                 <li><a href="{{route("verEmpresa",$id)}}">Ver datos</a></li>
                 <li><a href="{{route("editarEmpresa",$id)}}">Modificar datos</a></li>
-                <li><a href="#">Solicitudes de practicas</a></li>
+                {{-- <li><a href="#">Solicitudes de practicas</a></li> --}}
             </ul>
         </div>
     </nav>

@@ -13,7 +13,7 @@ solicitud practicas
             @csrf
             <div class="divider"></div>
             <div class="input-field">
-                <input name="alumnos" value="{{old("numero")}}" class="validate">
+                <input name="alumnos" value="{{old("numero")}}" placeholder="Número de alumnos" class="validate">
                 <label for="alumnos"></label>
             </div>
             @error('alumnos')
@@ -38,7 +38,7 @@ solicitud practicas
                 @enderror
             </div>
             <div class="divider"></div>
-            <div>  
+            <div>
                 <h5>Periodo</h5>
                 <label>
                     <input type="checkbox" checked="checked" name="marzo"/>
